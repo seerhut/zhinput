@@ -1,0 +1,71 @@
+My Blog (Chinese)  : http://www.seerhut.cn
+Addon's Homepage   : http://www.seerhut.cn/zhinput
+on Google code     : http://code.google.com/p/zhinput
+on SF.net          : http://sourceforge.net/projects/zhinput/
+On Curse Game      : http://www.curse.com/downloads/details/3230/
+On WoW UI          : http://ui.worldofwar.net/ui.php?id=2710
+Email              : seerhut_AT_gmail_DOT_com
+
+================================================================================
+
+针对玩家：
+    编写的动机是在我的linux上，当用cedega玩WoW时无法使用scim等XIM输入法输入中文。所以有了
+    这么一个纯插件实现的输入法，保证与系统无关，只要能运行WoW就能输入中文。所以可以从这个插
+    件上获取最大价值的当然是linux的WoW中文玩家。但有些Windows用户没有中文输入法或者在游戏
+    中打开系统输入法会导致不稳定，这个插件提供了一个很好的替代。
+    
+
+介绍：   
+    支持拼音和五笔输入,输入习惯同魔兽的聊天框操作类似，中文输入方式类似智能拼音。很容易上手。
+    
+
+
+使用方法：
+    使用时用命令 /zhinput 或者 /zi 打开输入窗口，当然最简便的方法是绑定一个快捷键，在快捷
+    键的目录中找到open zhinput即可。
+    
+    工作方式类似 智能拼音 ，应该很快就能上手。
+    
+    使用/r /y /s之类的聊天命令同普通的输入框一样，后跟空格即能正确识别并设置消息类型。
+    
+    回车则是把拼音栏中的字符直接输入对话中（这在输入诸如ft，lame时很有用），若拼音栏空，回车
+    送出消息。
+    
+    ESC清除拼音栏，若已空则关闭输入窗口。
+    
+    在拼音栏中删除字符时，若拼音栏已空，继续按删除(Backspace)会开始删除对话栏内的字符,免去
+    了鼠标点选窗口的麻烦。
+    
+    Tab将输入焦点移动到系统的对话栏内(这个功能基本不会用，我说过几乎所有聊天的操作都可以在我
+    的拼音框内完成)
+
+    此输入法中标点与字暂时等同对待，输入中文标点也是在拼音栏内按相应键，出现候选标点后选择即
+    可
+    
+    命令：
+    /zhinput     打开输入窗口
+    /zi          打开输入窗口
+    参数列表：
+        about    插件信息
+        help     此帮助信息
+        open     打开输入窗口
+        wubi     使用五笔输入
+        pinyin   使用拼音输入
+        savemem on   使用节省内存(默认)
+        savemem off   不使用节省内存
+        version  打印版本
+       
+       
+About: 
+    A chinese Input Method Addon for World of Warcraft(for any language version). 
+    Games running on cedega or wine cannot communicates with XIM program like 
+    SCIM, so I wrote this pure lua script addon to fix the problem. Of course It works 
+    quite well on Windows too. Have fun ^_^
+
+Usage :
+    Just type /zhinput or /zi  or set a key binding
+    
+
+Bug Report : 
+    Goto http://www.seerhut.cn/zhinput to report any bug or feature request.
+

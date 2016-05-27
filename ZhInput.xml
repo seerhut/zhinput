@@ -1,0 +1,628 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
+	<Script file="WbTable.lua" />
+	<Script file="PyTable.lua" />
+	<Script file="ZhInput.lua" />
+		
+	<CheckButton name="Zhinput_Check_Template"
+		inherits="OptionsCheckButtonTemplate" hidden="false" virtual="true">
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0" />
+		</HitRectInsets>
+		<Size>
+			<AbsDimension x="25" y="25" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT"
+				relativeTo="ZhinputionsFrame">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+
+	</CheckButton>
+
+	<Slider name="Zhinput_Slider_Template"
+		inherits="OptionsSliderTemplate" hidden="false" virtual="true">
+		<Size>
+			<AbsDimension x="135" y="16" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT"
+				relativeTo="$parent">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+
+	</Slider>
+
+	<Frame name="ZhInput" enableMouse="true" hidden="true"
+		movable="true" frameStrata="BACKGROUND" toplevel="true"
+		enableKeyboard="true">
+		<Size>
+			<AbsDimension x="500" y="80" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop
+			bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5" />
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="CanArea" inherits="GameFontNormal"
+					hidden="false" justifyV="TOP" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="450" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-10" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="InfoArea" inherits="GameFontNormal"
+					hidden="false" justifyV="TOP" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="50" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="CanArea"
+							relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentButtonClose"
+				inherits="OptionsButtonTemplate" text="close" hidden="false"
+				enableMouse="true">
+				<Size>
+					<AbsDimension x="40" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="8" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>ZhInput_Close();</OnClick>
+					<OnKeyDown>ZhInput_OnKeyDown();</OnKeyDown>
+					<OnKeyUp>ZhInput_OnKeyUp();</OnKeyUp>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="OpenConfig" inherits="UIPanelButtonTemplate"
+				text="config" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="40" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="27" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>OpenConfig_OnClick()</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="InputType" inherits="UIPanelButtonTemplate"
+				hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="40" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-60" y="8" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Switch_InputType()</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="OpenHelp" inherits="UIPanelButtonTemplate"
+				text="?" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="15" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="27" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>OpenHelp_OnClick()</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="OpenControl" inherits="UIPanelButtonTemplate"
+				text=">" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="15" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="8" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>OpenControl_OnClick()</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<!--  frameStrata="DIALOG"  -->
+			<EditBox name="PyArea" letters="200" hidden="false"
+				ignoreArrows="false" enableKeyboard="false" enableMouse="false"
+				historyLines="0">
+				<Size>
+					<AbsDimension x="400" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="4" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					
+					<OnUpdate>PyArea_OnUpdate(arg1);</OnUpdate>
+					<OnTextChanged>
+						PyArea_OnTextChanged();
+					</OnTextChanged>
+					<OnTextSet>PyArea_OnTextSet();</OnTextSet>
+				</Scripts>
+				<FontString inherits="GameFontNormal" justifyH="LEFT" />
+			</EditBox>
+			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED") ZhInput_OnLoad()
+			</OnLoad>
+			<OnEvent>ZhInput_OnEvent(event);</OnEvent>
+			<OnShow>ZhInput_OnShow();</OnShow>
+			<OnMouseDown>this:StartMoving();</OnMouseDown>
+			<OnMouseUp>this:StopMovingOrSizing();</OnMouseUp>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="Help" enableMouse="true" hidden="true"
+		frameStrata="TOP" toplevel="true">
+		<Size>
+			<AbsDimension x="400" y="300" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop
+			bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5" />
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="HelpString"
+					inherits="GameFontNormalSmall" hidden="false" justifyV="TOP"
+					justifyH="LEFT"
+					text="项目主页和bug报告等在:
+							http://www.seerhut.cn/zhinput">
+					<Size>
+						<AbsDimension x="350" y="200" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-10" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Button name="$parentButtonClose"
+				inherits="UIPanelButtonTemplate" text="Close" hidden="false">
+				<Size>
+					<AbsDimension x="80" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="4" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Help:Hide();</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+
+	<Frame name="Config" enableMouse="true" hidden="true" movable="true"
+		frameStrata="TOP" toplevel="true">
+		<Size>
+			<AbsDimension x="300" y="300" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop
+			bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5" />
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="Config_Header" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="420" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="20"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormalSmall" text="Zhinput v2.2">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="Config_Header">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>			  				
+			</Layer>
+		</Layers>
+		<Frames>
+
+			<CheckButton name="Check_SAVE_MEM"
+				inherits="Zhinput_Check_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT"
+						relativeTo="Config">
+						<Offset>
+							<AbsDimension x="10" y="-20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>getglobal(this:GetName().."Text"):SetText("开启内存节省功能");
+					</OnLoad>
+					<OnClick>Toggle_SAVE_MEM()</OnClick>
+					<OnShow>Update_Check_SAVE_MEM()</OnShow>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("变动此选项后需要重进人物才能生效", 1, 1, 1,
+						1);
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide();</OnLeave>
+				</Scripts>
+			</CheckButton>
+
+
+			<Slider name="Slider_STICKY_SEC"
+				inherits="Zhinput_Slider_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT"
+						relativeTo="Config">
+						<Offset>
+							<AbsDimension x="30" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("设置粘滞键速度（删除和左右键有效）")
+						getglobal(this:GetName().."High"):SetText("慢")
+						getglobal(this:GetName().."Low"):SetText("快")
+						this:SetMinMaxValues(0.02, 0.6);
+						this:SetValueStep(0.04);
+					</OnLoad>
+					<OnShow>
+					this:SetValue(STICKY_SEC)
+					GameTooltip:Hide();
+					</OnShow>
+					<OnValueChanged>
+			      STICKY_SEC = this:GetValue();
+			      GameTooltip:Hide()
+            		GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+					GameTooltip:SetText(strsub(STICKY_SEC,1,4).."秒", 1, 1, 1, 1);
+			    </OnValueChanged>
+					<OnEnter>
+						
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide();</OnLeave>
+				</Scripts>
+			</Slider>
+
+
+			<Button name="$parentButtonClose"
+				inherits="UIPanelButtonTemplate" text="Close" hidden="false">
+				<Size>
+					<AbsDimension x="80" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="4" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Config:Hide();</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				
+			</OnLoad>
+			<OnMouseDown>
+				if (arg1 == "LeftButton") then this:StartMoving(); end
+			</OnMouseDown>
+			<OnMouseUp>
+				if (arg1 == "LeftButton") then
+				this:StopMovingOrSizing(); end
+			</OnMouseUp>
+			<OnShow>
+
+			</OnShow>
+			<OnHide></OnHide>
+		</Scripts>
+	</Frame>
+
+	<Frame name="Control" enableMouse="true" hidden="true"
+		frameStrata="TOP" toplevel="true">
+		<Size>
+			<AbsDimension x="90" y="80" />
+		</Size>
+		<Anchors>
+			<Anchor point="LEFT" relativeTo="ZhInput"
+				relativePoint="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop
+			bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5" />
+			</BackgroundInsets>
+		</Backdrop>
+		<Frames>
+			<Button name="w_to" inherits="UIPanelButtonTemplate"
+				text="收件人" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="45" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Editbox_Control("to")</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="w_subject" inherits="UIPanelButtonTemplate"
+				text="标题" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="30" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="50" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Editbox_Control("subject")</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="w_body" inherits="UIPanelButtonTemplate"
+				text="信件内容" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="50" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-23" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Editbox_Control("body")</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="w_auc" inherits="UIPanelButtonTemplate"
+				text="拍卖行物品名" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="73" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-40" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Editbox_Control("auc")</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+			<Button name="w_chat" inherits="UIPanelButtonTemplate"
+				text="聊天" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="30" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-57" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Editbox_Control("chat")</OnClick>
+				</Scripts>
+				<NormalFont inherits="GameFontNormalSmall"
+					justifyH="CENTER" />
+			</Button>
+		</Frames>
+	</Frame>
+
+
+	<Frame name="ReloadWarning" enableMouse="true" hidden="true"
+		frameStrata="TOP" toplevel="true">
+		<Size>
+			<AbsDimension x="300" y="70" />
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOM" relativeTo="ZhInput"
+				relativePoint="TOP">
+				<Offset>
+					<AbsDimension x="0" y="9" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop
+			bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5" />
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="ReloadWarningString"
+					inherits="GameFontNormalSmall" hidden="false" justifyV="TOP"
+					justifyH="LEFT" text="你已经开启了savemem选项，切换输入法后需重新进入人物才能生效。">
+					<Size>
+						<AbsDimension x="270" y="50" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-10" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+
+		<Frames>
+
+			<Button name="$parentButtonClose"
+				inherits="OptionsButtonTemplate" text="确定" hidden="false">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="4" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>ReloadWarning:Hide();</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+
+
+</Ui>

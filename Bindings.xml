@@ -1,0 +1,7 @@
+
+<Bindings>
+    <Binding name="Open ZhInput" description="Open Chinese Input Method Window" header="ZHINPUT">
+        ZhInput_Show();
+    </Binding>
+    
+</Bindings>
